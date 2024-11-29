@@ -3,6 +3,8 @@ package com.aprendiz.projeto.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aprendiz.projeto.entities.Usuario;
 import com.aprendiz.projeto.services.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping(value = "/usuario")
 public class UsuarioController {
@@ -23,31 +27,35 @@ public class UsuarioController {
     private UsuarioService service;
 
     @GetMapping
-    public List<Usuario> procuraTodos() {
+    @Operation(
+    		summary = "Lista de usuários",
+    		description = "Esse método retorna uma lista de usuários")
+    public ResponseEntity< List<Usuario>> procuraTodos() {
         List<Usuario> listaDeUsuario = service.procuraTodos();
-        return listaDeUsuario;
+        return ResponseEntity.status(HttpStatus.OK).body(listaDeUsuario);
     }
 
     @GetMapping(value = "/{id}")
-    public Usuario procuraPorId(@PathVariable Integer id) {
+    public ResponseEntity<Usuario> procuraPorId(@PathVariable Integer id) {
         Usuario response = service.procuraPorId(id);
-        return response;
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping
-    public String adicionaUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<String> adicionaUsuario(@RequestBody Usuario usuario) {
         String response = service.adicionaUsuario(usuario);
-        return response;
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping(value = "/{id}")
-    public String editaUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
+    public ResponseEntity<String> editaUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
         String response = service.editarUsuario(id, usuario);
-        return response;
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping(value = "/{id}")
-    public void excluiUsuario(@PathVariable Integer id) {
+    public ResponseEntity<Void> excluiUsuario(@PathVariable Integer id) {
         service.excluirUsuario(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

@@ -4,3 +4,4 @@ INSERT INTO usuario (nome, senha, email) VALUES ('Carlos Pereira', 'AnimeÉpraGa
 INSERT INTO usuario (nome, senha, email) VALUES ('Ana Costa', 'iLoveKidBengala', 'anadecosta@hotmail.com');
 INSERT INTO usuario (nome, senha, email) VALUES ('Pedro Oliveira', 'Faz.o.LuizInacio', 'pedro.oliveira2@gmail.com');
 INSERT INTO usuario (nome, senha, email) VALUES ('Juliana Santos', 'CadeaPicanhaL', 'julianasantosnadasanto@yahoo.com');
+INSERT INTO usuario (nome, senha, email) VALUES ('Jorge Nahmias', 'DeiaBunda', 'jorgegay@iacu.com');

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aprendiz.projeto.entities.Usuario;
+import com.aprendiz.projeto.exceptions.NaoEncontradoExceptions;
 import com.aprendiz.projeto.repositories.UsuarioRepository;
 
 @Service
@@ -19,7 +20,8 @@ public class UsuarioService {
 	}
 	
 	public Usuario procuraPorId(Integer id) {
-		return repository.findById(id).get();
+		return repository.findById(id)
+				.orElseThrow(() -> new NaoEncontradoExceptions ("Id inválido! usuário não encontrado"));
 	}
 	
 	public String adicionaUsuario (Usuario usuario) {
